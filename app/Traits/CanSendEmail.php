@@ -19,6 +19,17 @@ trait CanSendEmail
      */
     public function mail()
     {
+        $this->mail = new PHPMailer(true);
+        $this->mail->isSMTP();
+        $this->mail->Host = 'smtp.gmail.com'; 
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = MAIL_FROM_ADDRESS; 
+        $this->mail->Password = 'mlhh zine hjlg pywm'; 
+        $this->mail->SMTPSecure = 'ssl';
+        $this->mail->Port = 465;
+        $this->mail->SMTPDebug = 0; 
+        $this->mail->Debugoutput = 'html'; 
+        $this->mail->isHTML(true);
 
         $this->mail = new PHPMailer(true);
         return $this;
