@@ -1,7 +1,12 @@
 <?php
 
+use Auth\Authenticator;
+
 include_once  '../autoload.php';
 session_start();
+$authenticator = new Authenticator();
+
+$authenticator->restrictedPageGuard('user_id', 'login.php');
 
 $tags = new Tags();
 $mainPage = new MainPage();
