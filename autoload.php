@@ -1,6 +1,12 @@
 <?php
 
+include '../vendor/autoload.php';
+
+
 if (!function_exists('autoloader')) {
+
+
+
     /**
      * Autoloads all the php classes from the app directory
      * @param $class
@@ -14,6 +20,8 @@ if (!function_exists('autoloader')) {
         $filePath = recursiveFileSearch($baseDir, $classPath);
 
 
+
+
         if ($filePath !== null && file_exists($filePath)) {
             require_once $filePath;
         }
@@ -21,7 +29,6 @@ if (!function_exists('autoloader')) {
 
     /**
      * recursively searches a given directory and returns the correct file path
-     * 
      * @param $directory
      * @param $classPath
      * @return
@@ -38,9 +45,12 @@ if (!function_exists('autoloader')) {
             }
         }
 
+
+
         return null;
     }
 
     spl_autoload_register('autoloader');
+
 
 }

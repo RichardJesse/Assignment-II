@@ -31,7 +31,7 @@ trait CanSendEmail
         $this->mail->Debugoutput = 'html'; 
         $this->mail->isHTML(true);
 
-        $this->mail = new PHPMailer(true);
+      
         return $this;
 
     }
