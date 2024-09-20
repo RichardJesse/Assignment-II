@@ -16,7 +16,7 @@ class Mail
      * @param $attachments
      * @return string|true
      */
-    public function sendMailWithTemplate($to, $subject, $html = '', $from = ''){
+    public function sendMailWithTemplate($to, $subject, $html = '', $from = MAIL_FROM_ADDRESS){
 
         return $this->mail()
            

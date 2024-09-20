@@ -42,7 +42,7 @@ trait CanSendEmail
      * @param $email
      * @return $this
      */
-    public function from($email = MAIL_FROM_ADDRESS)
+    public function from($email)
     {
 
         $this->mail->setFrom($email);

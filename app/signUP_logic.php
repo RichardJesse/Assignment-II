@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail = new \Entities\Mail();
 
 
-        $mail->sendMailWithTemplate($email, "Verify Email", $verification->content(APP_URL), MAIL_FROM_ADDRESS);
+        $mail->sendMailWithTemplate($email, "Verify Email", $verification->content(APP_URL));
 
         if ($message === 'Registration successfull!') {
             $response = array(
