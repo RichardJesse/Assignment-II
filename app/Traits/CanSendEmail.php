@@ -21,12 +21,12 @@ trait CanSendEmail
     {
         $this->mail = new PHPMailer(true);
         $this->mail->isSMTP();
-        $this->mail->Host = 'smtp.gmail.com'; 
+        $this->mail->Host = MAIL_HOST; 
         $this->mail->SMTPAuth = true;
         $this->mail->Username = MAIL_FROM_ADDRESS; 
-        $this->mail->Password = 'mlhh zine hjlg pywm'; 
-        $this->mail->SMTPSecure = 'ssl';
-        $this->mail->Port = 465;
+        $this->mail->Password = PHPMAILER_APP_KEY; 
+        $this->mail->SMTPSecure = SMTP_SECURE;
+        $this->mail->Port = MAIL_PORT;
         $this->mail->SMTPDebug = 0; 
         $this->mail->Debugoutput = 'html'; 
         $this->mail->isHTML(true);
