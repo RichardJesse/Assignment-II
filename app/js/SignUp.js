@@ -11,7 +11,7 @@ form.addEventListener('submit', async function (event) {
             body: formData
         });
 
-        console.log(response.json());
+        // console.log(response.json());
         const result = await response.json();
 
 
@@ -33,6 +33,7 @@ form.addEventListener('submit', async function (event) {
 
         toastElement.show();
         // window.location.href = 'login.php';
+        window.location.href = result.redirect;
 
     } catch (error) {
         console.log(error)

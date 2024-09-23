@@ -5,6 +5,7 @@ class Activate
 
     public function content($email)
     {
+        ob_start();
 ?>
         <div class="d-flex justify-content-center align-items-center vh-100">
             <div class="card shadow rounded-4" style="width: 70vw; height: 70vh;">
@@ -14,5 +15,6 @@ class Activate
             </div>
         </div>
 <?php
+return ob_get_clean();
     }
 }

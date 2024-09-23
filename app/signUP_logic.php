@@ -32,12 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
            $activationInfo = array('email' => $email); 
             
-           (new class { use HasPageActions;})->redirectWith('activate.php', $activationInfo);
-
-            $response = array(
-                "status" => 'success',
-                "message" => "Signup successfully!"
+           
+           $response = array(
+               "status" => 'success',
+               "message" => "Signup successfully!",
+               "redirect" => 'activate.php?' . http_build_query($activationInfo)
             );
+            
+            // (new class { use HasPageActions;})->redirect('activate.php');
         } else {
 
             $response = array(
