@@ -29,6 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->sendMailWithTemplate($email, "Verify Email", $verification->content(APP_URL));
 
         if ($message === 'Registration successfull!') {
+
+           $activationInfo = array('email' => $email); 
+            
+           (new class { use HasPageActions;})->redirectWith('activate.php', $activationInfo);
+
             $response = array(
                 "status" => 'success',
                 "message" => "Signup successfully!"
