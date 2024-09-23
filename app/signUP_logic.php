@@ -24,9 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $verification = new \Verification();
         $mail = new \Entities\Mail();
+        
 
 
-        $mail->sendMailWithTemplate($email, "Verify Email", $verification->content(APP_URL));
+        $mail->sendMailWithTemplate($email, "Verify Email", $verification->content($activation->generateActivationLink(APP_URL)));
 
         if ($message === 'Registration successfull!') {
 

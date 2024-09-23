@@ -53,6 +53,8 @@ if (!function_exists('autoloader')) {
     spl_autoload_register('autoloader');
 
     $tags = new Tags();
+    $activation = new Activation();
+    
 
 
 }

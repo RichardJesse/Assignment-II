@@ -6,6 +6,8 @@ class Activation
     /**
      * Generates unique code of a specified length
      * 
+     * @param $length
+     * 
      */
     public function generateCode($length = 6){
 
@@ -34,6 +36,17 @@ class Activation
 
 
         return $code;
+
+    }
+
+    public function generateActivationLink($appUrl){
+
+        $code = $this->generateCode();
+        $safeCode = base64_encode($code);
+
+        $activationCode = array('code' => $safeCode);
+        
+        return $appUrl . http_build_query($activationCode);
 
     }
 
