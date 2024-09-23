@@ -39,14 +39,20 @@ class Activation
 
     }
 
-    public function generateActivationLink($appUrl){
+    public function generateActivationLink($appUrl, $verificationPage = ''){
 
         $code = $this->generateCode();
         $safeCode = base64_encode($code);
 
         $activationCode = array('code' => $safeCode);
+
+        if (!empty($verificationPage)) {
+           
+            $appUrl = rtrim($appUrl, '/') . '/';
+            $verificationPage = ltrim($verificationPage, '/');
+        }
         
-        return $appUrl . http_build_query($activationCode);
+        return  $appUrl .$verificationPage."?". http_build_query($activationCode);
 
     }
 
