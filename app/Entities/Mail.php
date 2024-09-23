@@ -19,7 +19,6 @@ class Mail
     public function sendMailWithTemplate($to, $subject, $html = '', $from = MAIL_FROM_ADDRESS){
 
         return $this->mail()
-           
             ->to($to)
             ->from($from)
             ->subject($subject)
