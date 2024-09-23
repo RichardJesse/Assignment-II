@@ -25,6 +25,16 @@ trait HasPageActions
 
     }
 
+
+    /**
+     * Allows users to redirect to another page and
+     * pass data to that page through query parameters
+     * 
+     * @param $redirectPage
+     * @param $redirectData
+     * @return void
+     * 
+     */
     public function redirectWith($redirectPage, $redirectData){
         var_dump($redirectData);
 

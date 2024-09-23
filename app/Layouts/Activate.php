@@ -19,6 +19,9 @@ class Activate
                        A verification email has been sent to <span class="fw-bolder text-info"><?php echo $email ?></span>
 
                     </div>
+                    <div class="text-secondary fs-5 ">
+                            Follow the steps there to complete your registration
+                    </div>
                 </div>
             </div>
         </div>
