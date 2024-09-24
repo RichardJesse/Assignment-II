@@ -25,7 +25,7 @@ class Verify
 
     public function verifyActivationCode($code){
         
-        if($this->verifyCode($code)){
+        if(!$this->verifyCode($code)){
             return $this->verificationSuccess();
         }
 
@@ -51,14 +51,34 @@ class Verify
            
             setTimeout(function() {
                 window.location.href = 'login.php'; 
-            }, 2000); 
+            }, 3000); 
         </script>
     
         <?php
     }
 
     public function verificationFail(){
-        echo "fail";
+        ?>
+    
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            
+        <iframe src="https://lottie.host/embed/42b1b8f7-d46a-4454-8f02-951c332c5df4/DZTMvu8L4L.json" style="border: none; width: 400px; height: 400px;"></iframe>
+            
+            
+            <div class="display-4 text-danger" style="font-family: SUSE;">
+                   Failed 
+            </div>
+        </div>
+    
+       
+        <script>
+           
+            setTimeout(function() {
+                window.location.href = 'login.php'; 
+            }, 3000); 
+        </script>
+    
+        <?php
 
     }
 }
