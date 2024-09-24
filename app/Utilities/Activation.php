@@ -3,6 +3,8 @@
 
 class Activation 
 {
+    use NeedsDatabase;
+
     /**
      * Generates unique code of a specified length
      * 
@@ -64,5 +66,7 @@ class Activation
         return  $appUrl .$verificationPage."?". http_build_query($activationCode);
 
     }
+
+    
 
 }

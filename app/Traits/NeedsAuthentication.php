@@ -4,6 +4,7 @@
 trait NeedsAuthentication
 {
     use HasPageActions;
+    use NeedsDatabase;
 
 
     /**
@@ -38,5 +39,34 @@ trait NeedsAuthentication
 
         return true;
     }
+    
+    /**
+     * Verifies if the code that the code exists
+     * 
+     * @param $code
+     * 
+     */
+    public function verifyCode($code){
+        $sql = "SELECT id FROM users WHERE activation_code = :code LIMIT 1";
+
+        $db = $this->connectDatabase();
+    
+        try {
+            $stmt = $db->prepare($sql); 
+            $stmt->bindParam(':code', $code, PDO::PARAM_STR); 
+            $stmt->execute(); 
+    
+           
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+           
+            return $user ? true : false;
+        } catch (PDOException $e) {
+            
+            error_log("Database error: " . $e->getMessage());
+            return false; 
+        }
+    }
+
 
 }

@@ -4,12 +4,15 @@
 class Verify
 {
 
-    public function content($content)
+    use NeedsAuthentication;
+   
+
+    public function content($code)
     {
         ob_start();
 ?>
         <div class="d-flex justify-content-center align-items-center vh-100">
-            <?php echo $content; ?>
+            <?php $this->verifyActivationCode($code)?>
 
         </div>
 
@@ -17,5 +20,26 @@ class Verify
 <?php
 
         return ob_get_clean();
+    }
+
+    public function verifyActivationCode($code){
+        
+        if($this->verifyCode($code)){
+            return $this->verificationSuccess();
+        }
+
+        return $this->verificationFail();
+
+    }
+
+    public function verificationSuccess(){
+
+       echo "success";
+
+    }
+
+    public function verificationFail(){
+        echo "fail";
+
     }
 }
