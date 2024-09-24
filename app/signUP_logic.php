@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                "redirect" => 'activate.php?' . http_build_query($activationInfo)
             );
             
-            // (new class { use HasPageActions;})->redirect('activate.php');
+         
         } else {
 
             $response = array(

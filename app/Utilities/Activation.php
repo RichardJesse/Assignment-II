@@ -39,10 +39,21 @@ class Activation
 
     }
 
+    /**
+     * generates the activation link for user verificaiton
+     * 
+     * @param $appUrl
+     * @param $verificationPage
+     * 
+     * @return string
+     * 
+     */
     public function generateActivationLink($appUrl, $verificationPage = ''){
 
         $code = $this->generateCode();
+        
         $safeCode = base64_encode($code);
+
 
         $activationCode = array('code' => $safeCode);
 

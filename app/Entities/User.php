@@ -28,18 +28,20 @@ class User extends AbstractEntities
             return "All fields are required!";
         }
 
-
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        
+
 
         try {
 
-            $sql = "INSERT INTO users (username, email, password) 
-                    VALUES (:username, :email, :password)";
+            $sql = "INSERT INTO users (username, email, password, activation_code) 
+                    VALUES (:username, :email, :password, :activation_code)";
 
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashedPassword);
+
 
 
             $stmt->execute();
