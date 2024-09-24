@@ -56,11 +56,10 @@ trait NeedsAuthentication
             $stmt->bindParam(':code', $code, PDO::PARAM_STR); 
             $stmt->execute(); 
     
-           
+        
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-           
             return $user ? true : false;
+            
         } catch (PDOException $e) {
             
             error_log("Database error: " . $e->getMessage());
