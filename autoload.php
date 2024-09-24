@@ -54,6 +54,7 @@ if (!function_exists('autoloader')) {
 
     $tags = new Tags();
     $activation = new Activation();
+    $verify = new Verify();
     
 
 
