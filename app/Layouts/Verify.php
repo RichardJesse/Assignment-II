@@ -25,7 +25,7 @@ class Verify
 
     public function verifyActivationCode($code){
         
-        if(!$this->verifyCode($code)){
+        if($this->verifyCode($code)){
             return $this->verificationSuccess();
         }
 
