@@ -48,10 +48,8 @@ class Activation
      * @return string
      * 
      */
-    public function generateActivationLink($appUrl, $verificationPage = ''){
+    public function generateActivationLink($appUrl, $verificationPage = '', $code){
 
-        $code = $this->generateCode();
-        
         $safeCode = base64_encode($code);
 
 

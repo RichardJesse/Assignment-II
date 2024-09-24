@@ -22,12 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $message = $user->register($username, $email, $password);
 
-        $verification = new \Verification();
-        $mail = new \Entities\Mail();
+       
         
-
-
-        $mail->sendMailWithTemplate($email, "Verify Email", $verification->content($activation->generateActivationLink(APP_URL, 'verify.php'), $username));
 
         if ($message === 'Registration successfull!') {
 

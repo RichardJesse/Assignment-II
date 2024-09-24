@@ -2,7 +2,7 @@
 
 namespace Entities;
 
-
+use Activation;
 
 class User extends AbstractEntities
 {
@@ -29,9 +29,11 @@ class User extends AbstractEntities
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $verification = new \Verification();
+        $mail = new \Entities\Mail();
+        $activation = new Activation();
+        $activation_code = $activation->generateCode();
         
-
-
         try {
 
             $sql = "INSERT INTO users (username, email, password, activation_code) 
@@ -41,6 +43,7 @@ class User extends AbstractEntities
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindParam(':activation_code', $activation_code);
 
 
 
@@ -48,6 +51,7 @@ class User extends AbstractEntities
 
 
             if ($stmt->rowCount() > 0) {
+                $mail->sendMailWithTemplate($email, "Verify Email", $verification->content($activation->generateActivationLink(APP_URL, 'verify.php', $activation_code), $username));
 
                 return "Registration successfull!";
             } else {
