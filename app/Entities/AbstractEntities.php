@@ -15,4 +15,9 @@ class AbstractEntities
         $this->db =  $this->connectDatabase();
     }
 
+    public static function query(){
+        $query = new \HemiFrame\Lib\SQLBuilder\Query();
+        return $query;
+    }
+
 }

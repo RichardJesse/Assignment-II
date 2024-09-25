@@ -33,6 +33,8 @@ class User extends AbstractEntities
         $mail = new \Entities\Mail();
         $activation = new Activation();
         $activation_code = $activation->generateCode();
+
+        
         
         try {
 
