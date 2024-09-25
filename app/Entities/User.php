@@ -34,6 +34,8 @@ class User extends AbstractEntities
         $activation = new Activation();
         $activation_code = $activation->generateCode();
 
+        var_dump(User::query());
+
         
         
         try {

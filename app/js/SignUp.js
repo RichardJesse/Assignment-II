@@ -11,7 +11,7 @@ form.addEventListener('submit', async function (event) {
             body: formData
         });
 
-        // console.log(response.json());
+        console.log(response.json());
         const result = await response.json();
 
 
