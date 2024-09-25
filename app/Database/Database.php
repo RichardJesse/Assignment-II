@@ -35,6 +35,7 @@ class Database
             ];
 
             $this->pdo = new \PDO($dsn, $this->username, $this->password, $options);
+            \HemiFrame\Lib\SQLBuilder\Query::$global['pdo'] = $this->pdo;
 
         } catch (\PDOException $e) {
             die("Database connection failed: " . $e->getMessage());

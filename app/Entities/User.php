@@ -34,7 +34,7 @@ class User extends AbstractEntities
         $activation = new Activation();
         $activation_code = $activation->generateCode();
 
-        var_dump(User::query());
+        
 
         
         
@@ -81,6 +81,8 @@ class User extends AbstractEntities
     public function login($email, $password) {
         $user = $this->findUserByEmail($email);
 
+        
+
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
@@ -99,13 +101,7 @@ class User extends AbstractEntities
      * @return mixed
      */
     public function findUserByEmail($email) {
-        $sql = 'SELECT * FROM users WHERE email = :email';
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-
-        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $user = User::query()->select()->where('email', $email)->fetchFirstArray();
 
         return $user;
     }

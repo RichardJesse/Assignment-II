@@ -13,7 +13,7 @@ form.addEventListener('submit', async function (event) {
 
 
 
-
+        // console.log(response.json());
         const result = await response.json();
 
 
