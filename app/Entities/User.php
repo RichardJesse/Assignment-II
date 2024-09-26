@@ -40,21 +40,21 @@ class User extends AbstractEntities
         
         try {
 
-           $details =  User::query()->insertInto('users')->values([
-                'username' ,
-                'email' ,
-                'password' ,
-                'activation_code' 
-            ],
-            [
-                $username,
-                $email,
-                $password,
-                $activation_code
-            ])->execute();
+            $sql = "INSERT INTO users (username, email, password, activation_code) 
+                    VALUES (:username, :email, :password, :activation_code)";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindParam(':activation_code', $activation_code);
 
 
-            if ($details->rowCount() > 0) {
+
+            $stmt->execute();
+
+
+            if ($stmt->rowCount() > 0) {
                 $mail->sendMailWithTemplate($email, "Verify Email", $verification->content($activation->generateActivationLink(APP_URL, 'verify.php', $activation_code), $username));
 
                 return "Registration successfull!";
