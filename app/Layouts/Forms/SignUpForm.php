@@ -29,19 +29,19 @@ class SignUpForm
                                 <div class="form-floating mb-3 w-75 mx-auto">
                                     <input name="username" class="form-control rounded-pill focus-ring focus-ring-info" type="text" placeholder="Username" aria-label="Username" required>
                                     <label for="floatingInput">Username</label>
-                                    <div id="username-error" class="text-danger"></div> 
+                                    <div id="username-error" class="text-danger text-center"></div> 
                                 </div>
 
                                 <div class="form-floating mb-3 w-75 mx-auto">
                                     <input name="email" class="form-control rounded-pill focus-ring focus-ring-info" type="email" placeholder="Email" aria-label="Email" required>
                                     <label for="floatingInput">Email</label>
-                                    <div id="email-error" class="text-danger"></div> 
+                                    <div id="email-error" class="text-danger text-center"></div> 
                                 </div>
 
                                 <div class="form-floating mb-3 w-75 mx-auto">
                                     <input name="password" class="form-control rounded-pill focus-ring focus-ring-info" type="password" placeholder="Password" aria-label="Password" required>
                                     <label for="floatingInput">Password</label>
-                                    <div id="password-error" class="text-danger"></div>
+                                    <div id="password-error" class="text-danger text-center"></div>
                                 </div>
 
                                 <div class="mb-3 w-75 mx-auto">

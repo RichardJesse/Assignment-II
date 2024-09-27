@@ -51,7 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         elseif($message === "Email already has an account") {
-            
+
+            $response = array(
+                "status" => 'failed',
+                "message" => "Email Taken",
+                "field" => "email" 
+            );
              
         }
         

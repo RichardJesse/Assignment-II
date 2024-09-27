@@ -129,7 +129,7 @@ class User extends AbstractEntities
 
     public function checkEmailExists($email) {
 
-        $match = User::query()->select()->where('username', $email)->rowCount();
+        $match = User::query()->select()->where('email', $email)->rowCount();
        return $match > 0;
 
     }
