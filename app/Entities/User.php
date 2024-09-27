@@ -23,7 +23,8 @@ class User extends AbstractEntities
      * @param $password
      * @return false|string
      */
-    public function register($username, $email, $password) {
+    public function register($username, $email, $password)
+    {
         if (empty($username) || empty($email) || empty($password)) {
             return "All fields are required!";
         }
@@ -34,16 +35,23 @@ class User extends AbstractEntities
         $activation = new Activation();
         $activation_code = $activation->generateCode();
 
-        
-           if($this->checkUsernameExists($username)){
-                return "Username exists!";
-           }
 
-           if($this->checkEmailExists($email)){
-                return "Email already has an account";
-           }
-        
-        
+        if ($this->checkUsernameExists($username)) {
+            return "Username exists!";
+        }
+
+        if ($this->checkEmailExists($email)) {
+            return "Email already has an account";
+        }
+
+        $passwordRule = $this->evaluatePassword($password);
+        if($passwordRule['isValid'] == false){
+            foreach ($passwordRule['messages'] as $message) {
+                return $message;
+            }
+        }
+
+
         try {
 
             $sql = "INSERT INTO users (username, email, password, activation_code) 
@@ -70,9 +78,9 @@ class User extends AbstractEntities
         } catch (PDOException $e) {
 
             if ($e->getCode() == 23000) {
-                return json_encode("Username or email already exists!") ;
+                return json_encode("Username or email already exists!");
             } else {
-                return "Error: " . $e->getMessage().json_encode();
+                return "Error: " . $e->getMessage() . json_encode();
             }
         }
     }
@@ -84,7 +92,8 @@ class User extends AbstractEntities
      * @param $password
      * @return string
      */
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
         $user = $this->findUserByEmail($email);
 
         if ($user && password_verify($password, $user['password'])) {
@@ -104,11 +113,11 @@ class User extends AbstractEntities
      * @param $email
      * @return mixed
      */
-    public function findUserByEmail($email) {
+    public function findUserByEmail($email)
+    {
 
         $user = User::query()->select()->where('email', $email)->fetchFirstArray();
         return $user;
-
     }
 
 
@@ -120,20 +129,67 @@ class User extends AbstractEntities
      * @return bool
      * 
      */
-    public function checkUsernameExists($username) {
+    public function checkUsernameExists($username)
+    {
 
-       $match = User::query()->select()->where('username', $username)->rowCount();
-       return $match > 0;
-
+        $match = User::query()->select()->where('username', $username)->rowCount();
+        return $match > 0;
     }
 
-    public function checkEmailExists($email) {
+    public function checkEmailExists($email)
+    {
 
         $match = User::query()->select()->where('email', $email)->rowCount();
-       return $match > 0;
-
+        return $match > 0;
     }
-    
+
+    /**
+     * Evaluates if a password meets specified rules.
+     *
+     * @param string $password The password to evaluate.
+     * @return array An array containing the evaluation result and messages.
+     */
+    function evaluatePassword($password)
+    {
+        
+        $result = [
+            'isValid' => true,
+            'messages' => []
+        ];
+
+       
+        if (strlen($password) < 8) {
+            $result['isValid'] = false;
+            $result['messages'][] = "Password must be at least 8 characters long.";
+        }
+
+       
+        if (!preg_match('/[A-Z]/', $password)) {
+            $result['isValid'] = false;
+            $result['messages'][] = "Password must include at least one uppercase letter.";
+        }
+
+       
+        if (!preg_match('/[a-z]/', $password)) {
+            $result['isValid'] = false;
+            $result['messages'][] = "Password must include at least one lowercase letter.";
+        }
+
+        
+        if (!preg_match('/[0-9]/', $password)) {
+            $result['isValid'] = false;
+            $result['messages'][] = "Password must include at least one number.";
+        }
+
+       
+        if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
+            $result['isValid'] = false;
+            $result['messages'][] = "Password must include at least one special character.";
+        }
+
+        return $result;
+    }
+
 
     /**
      * Destroys the current logged in user session
@@ -151,7 +207,8 @@ class User extends AbstractEntities
      *
      * @return array|null
      */
-    public function current() {
+    public function current()
+    {
         if (isset($_SESSION['user_id'])) {
             return [
                 'id' => $_SESSION['user_id'],
@@ -174,6 +231,4 @@ class User extends AbstractEntities
 
         return $user;
     }
-
-
 }
