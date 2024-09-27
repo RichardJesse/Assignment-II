@@ -20,20 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
 
-        if($user->checkUsernameExists($username)){
+       
 
-            $response = array(
-                "status" => 'failed',
-                "message" => "Username already exists!",
-                "field" => "username" 
-            );
-
-            echo json_encode($response);
-            exit;
-                
-        }
-
-        // var_dump($user->checkUsernameExists($username));
+        
 
         $message = $user->register($username, $email, $password);
 
@@ -52,7 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             
          
-        } else {
+        } elseif ($message === "")
+        
+        else {
 
             $response = array(
                 "status" => 'failed',

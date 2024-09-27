@@ -35,7 +35,9 @@ class User extends AbstractEntities
         $activation_code = $activation->generateCode();
 
         
-
+           if($this->checkUsernameExists($username)){
+                return "Registration successfull!";
+           }
         
         
         try {
@@ -116,7 +118,7 @@ class User extends AbstractEntities
      * 
      */
     public function checkUsernameExists($username) {
-       $match = User::query()->select('COUNT(*)')->where('username', $username)->fetchColumn();
+       $match = User::query()->select()->where('username', $username)->fetchColumn();
 
        return $match > 0;
     }
