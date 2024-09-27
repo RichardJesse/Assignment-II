@@ -106,6 +106,22 @@ class User extends AbstractEntities
         return $user;
     }
 
+
+    /**
+     * Checks if the username exists
+     * 
+     * @param $username
+     * 
+     * @return bool
+     * 
+     */
+    public function checkUsernameExists($username) {
+       $match = User::query()->select('COUNT(*)')->where('username', $username)->fetchColumn();
+
+       return $match > 0;
+    }
+    
+
     /**
      * Destroys the current logged in user session
      *

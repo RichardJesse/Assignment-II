@@ -20,6 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
 
+        if($user->checkUsernameExists($username)){
+            
+            $response = array(
+                "status" => 'failed',
+                "message" => "Username already exists!",
+                "field" => "username" 
+            );
+            
+            
+        }
+
         $message = $user->register($username, $email, $password);
 
        
