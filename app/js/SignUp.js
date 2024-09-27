@@ -15,7 +15,8 @@ form.addEventListener('submit', async function (event) {
             method: 'POST',
             body: formData
         });
-
+        
+        // console.log(response.json());
         const result = await response.json();
 
         const toastMessageElement = document.getElementById('toast-message');
