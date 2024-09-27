@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = array(
             "status" => 'failed',
-            "message" => "internal server error!"
+            "message" => $loginResult
         );
 
 

@@ -96,6 +96,10 @@ class User extends AbstractEntities
     {
         $user = $this->findUserByEmail($email);
 
+        if($user == null){
+            return "The email you provided does not exist";
+        }
+
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
@@ -114,7 +118,10 @@ class User extends AbstractEntities
      * @return mixed
      */
     public function findUserByEmail($email)
-    {
+    { 
+        if(!($this->checkEmailExists($email))){
+            return null;
+        }
 
         $user = User::query()->select()->where('email', $email)->fetchFirstArray();
         return $user;
@@ -136,6 +143,11 @@ class User extends AbstractEntities
         return $match > 0;
     }
 
+    /**
+     * Check if the email exists
+     * 
+     * @return bool
+     */
     public function checkEmailExists($email)
     {
 
@@ -198,7 +210,6 @@ class User extends AbstractEntities
      */
     function validateEmail($email)
     {
-        // Use PHP's built-in filter to validate email format
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 
@@ -262,6 +273,12 @@ class User extends AbstractEntities
         }
     }
 
+    /**
+     * Get all the user record
+     * 
+     * 
+     * @return array
+     */
     public  function all()
     {
         $users = User::query()->select()->fetchArrays();

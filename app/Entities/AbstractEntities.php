@@ -59,4 +59,5 @@ class AbstractEntities
 
         return $query->from(self::getTableName($className));
     }
+
 }
