@@ -41,7 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             
          
-        } elseif ($message === "")
+        } elseif ($message === "Username exists!") {
+            
+            $response = array(
+                "status" => 'failed',
+                "message" => "Username already exists!",
+                "field" => "username" 
+            );
+        }
         
         else {
 

@@ -36,7 +36,7 @@ class User extends AbstractEntities
 
         
            if($this->checkUsernameExists($username)){
-                return "Registration successfull!";
+                return "Username exists!";
            }
         
         
@@ -118,7 +118,7 @@ class User extends AbstractEntities
      * 
      */
     public function checkUsernameExists($username) {
-       $match = User::query()->select()->where('username', $username)->fetchColumn();
+       $match = User::query()->select()->where('username', $username)->rowCount();
 
        return $match > 0;
     }
