@@ -38,6 +38,10 @@ class User extends AbstractEntities
            if($this->checkUsernameExists($username)){
                 return "Username exists!";
            }
+
+           if($this->checkEmailExists($email)){
+                return "Email already has an account";
+           }
         
         
         try {
@@ -83,8 +87,6 @@ class User extends AbstractEntities
     public function login($email, $password) {
         $user = $this->findUserByEmail($email);
 
-        
-
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
@@ -103,9 +105,10 @@ class User extends AbstractEntities
      * @return mixed
      */
     public function findUserByEmail($email) {
-        $user = User::query()->select()->where('email', $email)->fetchFirstArray();
 
+        $user = User::query()->select()->where('email', $email)->fetchFirstArray();
         return $user;
+
     }
 
 
@@ -118,9 +121,17 @@ class User extends AbstractEntities
      * 
      */
     public function checkUsernameExists($username) {
-       $match = User::query()->select()->where('username', $username)->rowCount();
 
+       $match = User::query()->select()->where('username', $username)->rowCount();
        return $match > 0;
+
+    }
+
+    public function checkEmailExists($email) {
+
+        $match = User::query()->select()->where('username', $email)->rowCount();
+       return $match > 0;
+
     }
     
 

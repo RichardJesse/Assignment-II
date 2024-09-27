@@ -42,12 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
          
         } elseif ($message === "Username exists!") {
-            
+
             $response = array(
                 "status" => 'failed',
                 "message" => "Username already exists!",
                 "field" => "username" 
             );
+        }
+
+        elseif($message === "Email already has an account") {
+            
+             
         }
         
         else {
