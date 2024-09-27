@@ -25,7 +25,6 @@ class Mail
             ->html($html)
             ->send();
 
-
     }
 
 }
