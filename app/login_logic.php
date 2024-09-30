@@ -24,7 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    } else {
+    }elseif($loginResult === "email does not exist") {
+
+        $response = array(
+            "status" => 'failed',
+            "message" => 'information does not match our records',
+            "field" => 'email'
+        );
+
+    }
+     else {
 
         $response = array(
             "status" => 'failed',

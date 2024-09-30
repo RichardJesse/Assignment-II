@@ -97,7 +97,7 @@ class User extends AbstractEntities
         $user = $this->findUserByEmail($email);
 
         if($user == null){
-            return "The email you provided does not exist";
+            return "email does not exist";
         }
 
         if ($user && password_verify($password, $user['password'])) {

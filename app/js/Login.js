@@ -26,7 +26,10 @@ form.addEventListener('submit', async function (event) {
             toast.classList.remove('text-bg-danger');
             toast.classList.add('text-bg-success');
 
-        } else {
+        } else if (result.field === 'email') {
+            document.getElementById('email-error').innerText = result.message;
+        }
+        else {
             toast.classList.remove('text-bg-success');
             toast.classList.add('text-bg-danger');
         }

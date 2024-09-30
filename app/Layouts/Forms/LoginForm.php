@@ -32,6 +32,7 @@ class LoginForm
                                 <div  class="form-floating mb-3 w-75 mx-auto">
                                     <input class="form-control rounded-pill  focus-ring focus-ring-info" type="email" placeholder="Default input" aria-label="default input example" name="email">
                                     <label for="floatingInput">Email</label>
+                                    <div id="email-error" class="text-danger text-center"></div>
                                 </div>
 
 
