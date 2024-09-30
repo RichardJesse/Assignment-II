@@ -68,10 +68,10 @@ class MainPage
                         <!--                            <a class="nav-link" href="#">Pricing</a>-->
                         <!--                        </li> -->
                     </ul>
-                    <div class="p-3 " style="font-family: SUSE;" id=""> profile</div>
+                    <div class="p-3 btn  rounded-full" style="font-family: SUSE;" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> profile</div>
                     <span class="navbar-text">
-                        
-                        
+
+
                         <form action="logout.php" method="post">
                             <button type="submit" class="btn btn-info hover-btn-outline"><span style="font-family: SUSE">Logout</span></button>
                         </form>
@@ -79,6 +79,24 @@ class MainPage
                 </div>
             </div>
         </nav>
+
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 <?php
     }
 }
