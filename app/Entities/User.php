@@ -45,10 +45,18 @@ class User extends AbstractEntities
         }
 
         $passwordRule = $this->evaluatePassword($password);
+        $usernameRule = $this->validateUsername($username);
         if ($passwordRule['isValid'] == false) {
             foreach ($passwordRule['messages'] as $message) {
                 return $message;
             }
+        }
+
+        if ($usernameRule['isValid'] == false){
+            foreach ($usernameRule['messages'] as $message) {
+                return $message;
+            }
+
         }
 
 

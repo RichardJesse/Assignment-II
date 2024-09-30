@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
 
-
     }elseif($loginResult === "email does not exist") {
 
         $response = array(
@@ -39,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "status" => 'failed',
             "message" => $loginResult
         );
-
 
     }
 
