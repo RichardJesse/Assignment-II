@@ -122,36 +122,7 @@ class User extends AbstractEntities
         return $user;
     }
 
-    /**
-     * Validate the users input
-     * 
-     * @param $email
-     * @param $password
-     * @param $username 
-     * 
-     */
-    public function validate($email, $password, $username)
-    {
-        $passwordRule = $this->evaluatePassword($password);
-        $usernameRule = $this->validateUsername($username);
-        $emailRule = $this->validateEmail($email);
-
-        if ($passwordRule['isValid'] == false) {
-            foreach ($passwordRule['messages'] as $message) {
-                return $message;
-            }
-        }
-
-        if ($usernameRule['isValid'] == false) {
-            foreach ($usernameRule['messages'] as $message) {
-                return $message;
-            }
-        }
-
-        if ($emailRule == false) {
-            return "invalid email fomart";
-        }
-    }
+    
 
 
     /**
