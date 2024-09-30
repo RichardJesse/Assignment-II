@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "message" => "Username already exists!",
                 "field" => "username" 
             );
+            
         }
 
         elseif($message === "Email already has an account") {
