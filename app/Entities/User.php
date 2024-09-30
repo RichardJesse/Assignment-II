@@ -3,10 +3,13 @@
 namespace Entities;
 
 use Activation;
+use PDO;
+use ValidationRule;
 
 class User extends AbstractEntities
 {
     use \HasPageActions;
+    use ValidationRule;
 
 
     private $id;
@@ -44,21 +47,7 @@ class User extends AbstractEntities
             return "Email already has an account";
         }
 
-        $passwordRule = $this->evaluatePassword($password);
-        $usernameRule = $this->validateUsername($username);
-        if ($passwordRule['isValid'] == false) {
-            foreach ($passwordRule['messages'] as $message) {
-                return $message;
-            }
-        }
-
-        if ($usernameRule['isValid'] == false){
-            foreach ($usernameRule['messages'] as $message) {
-                return $message;
-            }
-
-        }
-
+        $this->validate($email, $password, $username);
 
         try {
 
@@ -70,8 +59,6 @@ class User extends AbstractEntities
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashedPassword);
             $stmt->bindParam(':activation_code', $activation_code);
-
-
 
             $stmt->execute();
 
@@ -104,7 +91,7 @@ class User extends AbstractEntities
     {
         $user = $this->findUserByEmail($email);
 
-        if($user == null){
+        if ($user == null) {
             return "email does not exist";
         }
 
@@ -126,13 +113,44 @@ class User extends AbstractEntities
      * @return mixed
      */
     public function findUserByEmail($email)
-    { 
-        if(!($this->checkEmailExists($email))){
+    {
+        if (!($this->checkEmailExists($email))) {
             return null;
         }
 
         $user = User::query()->select()->where('email', $email)->fetchFirstArray();
         return $user;
+    }
+
+    /**
+     * Validate the users input
+     * 
+     * @param $email
+     * @param $password
+     * @param $username 
+     * 
+     */
+    public function validate($email, $password, $username)
+    {
+        $passwordRule = $this->evaluatePassword($password);
+        $usernameRule = $this->validateUsername($username);
+        $emailRule = $this->validateEmail($email);
+
+        if ($passwordRule['isValid'] == false) {
+            foreach ($passwordRule['messages'] as $message) {
+                return $message;
+            }
+        }
+
+        if ($usernameRule['isValid'] == false) {
+            foreach ($usernameRule['messages'] as $message) {
+                return $message;
+            }
+        }
+
+        if ($emailRule == false) {
+            return "invalid email fomart";
+        }
     }
 
 
@@ -146,7 +164,6 @@ class User extends AbstractEntities
      */
     public function checkUsernameExists($username)
     {
-
         $match = User::query()->select()->where('username', $username)->rowCount();
         return $match > 0;
     }
@@ -158,96 +175,8 @@ class User extends AbstractEntities
      */
     public function checkEmailExists($email)
     {
-
         $match = User::query()->select()->where('email', $email)->rowCount();
         return $match > 0;
-    }
-
-    /**
-     * Evaluates if a password meets specified rules.
-     *
-     * @param string $password The password to evaluate.
-     * @return array An array containing the evaluation result and messages.
-     */
-    function evaluatePassword($password)
-    {
-
-        $result = [
-            'isValid' => true,
-            'messages' => []
-        ];
-
-
-        if (strlen($password) < 8) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Password must be at least 8 characters long.";
-        }
-
-
-        if (!preg_match('/[A-Z]/', $password)) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Password must include at least one uppercase letter.";
-        }
-
-
-        if (!preg_match('/[a-z]/', $password)) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Password must include at least one lowercase letter.";
-        }
-
-
-        if (!preg_match('/[0-9]/', $password)) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Password must include at least one number.";
-        }
-
-
-        if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Password must include at least one special character.";
-        }
-
-        return $result;
-    }
-
-    /**
-     * Validates if the email is in the correct format.
-     *
-     * @param string $email The email to validate.
-     * @return bool Returns true if the email is valid, false otherwise.
-     */
-    function validateEmail($email)
-    {
-        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
-    }
-
-
-    /**
-     * Validates if the username follows specific format rules.
-     *
-     * @param string $username The username to validate.
-     * @return array An array containing the evaluation result and messages.
-     */
-    function validateUsername($username)
-    {
-        $result = [
-            'isValid' => true,
-            'messages' => []
-        ];
-
-
-        if (strlen($username) < 4 || strlen($username) > 20) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Username must be between 4 and 20 characters.";
-        }
-
-
-        if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-            $result['isValid'] = false;
-            $result['messages'][] = "Username can only contain letters, numbers, and underscores.";
-        }
-
-        return $result;
     }
 
 
