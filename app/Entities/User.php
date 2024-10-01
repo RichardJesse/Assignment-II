@@ -106,6 +106,9 @@ class User extends AbstractEntities
         }
     }
 
+
+    public function updateProfile()
+
     /**
      * Finds all associated user details
      *
