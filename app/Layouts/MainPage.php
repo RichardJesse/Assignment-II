@@ -6,6 +6,8 @@ class MainPage
     {
 ?>
         <?php echo $this->navigation() ?>
+        
+
 
         <div id="loader">
             <div class="d-flex flex-column justify-content-center align-items-center vh-100">
@@ -23,6 +25,7 @@ class MainPage
             </div>
         </div>
 
+        <?php  $this->loadProfileModal();  ?>
         <script>
             setInterval(function() {
                 document.getElementById('loader').style.display = 'none';;
@@ -46,23 +49,26 @@ class MainPage
         return  $user->current();
     }
 
-    public function loadProfileModal(){
+    public function loadProfileModal()
+    {
         $modal = new Modal();
         $profileView = new UserProfile();
+        $modalContent = $profileView->content($this->profileSection());
 
-        return $modal->content($profileView->content($this->profileSection()));
+        return $modal->content($modalContent);
     }
 
-    
+
 
     public function navigation()
     {
+        ob_clean()
     ?>
         <nav class="navbar navbar-expand-lg bg-light shadow">
             <div class="container-fluid">
                 <div class="display-5" style="font-family: SUSE">
 
-                
+
                     <strong class="text-info "><?php echo $this->profileSection()['username'] ?></strong>
 
                 </div>
@@ -89,9 +95,9 @@ class MainPage
             </div>
         </nav>
 
-      
 
-      
+        
 <?php
+        return ob_get_clean();
     }
 }

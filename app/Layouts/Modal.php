@@ -6,7 +6,7 @@ class Modal
 
     public function content($modalContent)
     {
-       
+        ob_start();
 ?>
 
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -31,6 +31,6 @@ class Modal
 
 
 <?php
-       
+        return ob_get_clean();
     }
 }
