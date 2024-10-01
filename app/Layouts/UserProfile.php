@@ -5,6 +5,7 @@ class UserProfile
 
     public function content($currentUser)
     {
+        ob_start();
         
 ?>
         <form id="signup-form" class="w-100 align-items-center" method="post" action="signUp_logic.php">

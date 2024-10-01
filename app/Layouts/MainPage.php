@@ -25,7 +25,7 @@ class MainPage
             </div>
         </div>
 
-        <?php  $this->loadProfileModal();  ?>
+        <?php echo  $this->loadProfileModal();  ?>
         <script>
             setInterval(function() {
                 document.getElementById('loader').style.display = 'none';;
@@ -53,9 +53,10 @@ class MainPage
     {
         $modal = new Modal();
         $profileView = new UserProfile();
-        $modalContent = $profileView->content($this->profileSection());
+        $currentUser =  $this->profileSection();
+        $modalContent = $profileView->content($currentUser);
 
-        return $modal->content($modalContent);
+        return $modal->content($modalContent, "Your Profile");
     }
 
 
