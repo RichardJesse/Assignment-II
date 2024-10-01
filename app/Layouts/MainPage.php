@@ -46,11 +46,14 @@ class MainPage
         return  $user->current();
     }
 
-    public function loadModal(){
+    public function loadProfileModal(){
         $modal = new Modal();
+        $profileView = new UserProfile();
 
-        return $modal->content($this->profileSection());
+        return $modal->content($profileView->content($this->profileSection()));
     }
+
+    
 
     public function navigation()
     {
@@ -59,7 +62,7 @@ class MainPage
             <div class="container-fluid">
                 <div class="display-5" style="font-family: SUSE">
 
-
+                
                     <strong class="text-info "><?php echo $this->profileSection()['username'] ?></strong>
 
                 </div>
@@ -85,6 +88,8 @@ class MainPage
                 </div>
             </div>
         </nav>
+
+      
 
       
 <?php
