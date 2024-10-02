@@ -106,8 +106,26 @@ class User extends AbstractEntities
         }
     }
 
+    /**
+     * updating the user information based on the change that was made
+     * 
+     * @param $data - array 
+     * 
+     * @return bool|string 
+     * 
+     */
+    public function updateProfile($data){
 
-    public function updateProfile()
+
+        if(!$this->isArray($data)){
+            return 'there is a problem with the data that you are sending';
+        }
+
+        
+
+
+
+    }
 
     /**
      * Finds all associated user details

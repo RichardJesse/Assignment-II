@@ -122,5 +122,20 @@ trait ValidationRule {
     }
 
 
+    /**
+     * Checks if the data that is being passed is of type array
+     * 
+     * @param $info
+     */
+    public function isArray($info){
+        if(is_array($info)){
+            return true;
+        }
+
+        return false;
+      
+    }
+
+
 
 }
