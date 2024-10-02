@@ -123,7 +123,16 @@ class User extends AbstractEntities
 
         $oldDetails = $this->findUserByEmail($data['email']);
 
-        $oldDetails
+       if($oldDetails['email'] == $data['email']){
+
+        // if same ignore otherwise insert the new email
+        // same goes for username
+           
+       }
+        $oldDetails['username'] == $data['username'];
+       
+
+
 
 
 
