@@ -8,7 +8,7 @@ class UserProfile
         ob_start();
         
 ?>
-        <form id="signup-form" class="w-100 align-items-center" method="post" action="signUp_logic.php">
+        <form id="signup-form" class="w-100 align-items-center" method="post" action="update_logic.php">
             
             <div class="form-floating mb-3 w-75 mx-auto">
                 <input name="username" class="form-control focus-ring focus-ring-info" type="text" placeholder="Username" aria-label="Username" value="<?php echo $currentUser['username'] ?>" required>
