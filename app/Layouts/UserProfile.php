@@ -22,7 +22,7 @@ class UserProfile
             </div>
 
             <div class="form-floating mb-3 w-75 mx-auto">
-                <input name="password" class="form-control  focus-ring focus-ring-info" type="password" placeholder="Password" aria-label="Password"  required>
+                <input name="password" class="form-control  focus-ring focus-ring-info" type="password" placeholder="Password" aria-label="Password" >
                 <label for="floatingInput">Password</label>
                 
             </div>
