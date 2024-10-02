@@ -121,7 +121,10 @@ class User extends AbstractEntities
             return 'there is a problem with the data that you are sending';
         }
 
-        
+        $oldDetails = $this->findUserByEmail($data['email']);
+
+        $oldDetails
+
 
 
 
