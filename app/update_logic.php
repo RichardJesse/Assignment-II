@@ -6,7 +6,10 @@ include_once '../autoload.php';
 use Entities\User;
 
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    session_start();
     $user = new User();
 
 
@@ -28,10 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     };
 
     if($updated){
+        
         $_SESSION['username'] = $data['username'];
         $_SESSION['email'] = $data['email'];
-
-        // var_dump($_SESSION['username']);
+        
+        
+        $_SESSION['username'];
+        $_SESSION['email'];
 
         $redirect->updated();
     }

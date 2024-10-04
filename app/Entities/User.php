@@ -138,7 +138,7 @@ class User extends AbstractEntities
         }
         
 
-        $update->where('email', $oldDetails['email']);
+        $update->where('id', $oldDetails['email'])->execute();
         
         if($update){
             return true;
