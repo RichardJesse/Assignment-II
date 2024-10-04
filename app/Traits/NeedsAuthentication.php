@@ -47,7 +47,7 @@ trait NeedsAuthentication
      * 
      */
     public function verifyCode($code){
-        $sql = "SELECT id FROM users WHERE activation_code = :code LIMIT 1";
+        $sql = "SELECT * FROM users WHERE activation_code = :code LIMIT 1";
 
         $db = $this->connectDatabase();
     
@@ -58,12 +58,43 @@ trait NeedsAuthentication
     
         
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $user ? true : false;
+            if($user){
+                if($user['activated'] == 1){
+                    return false;
+                }
+                $this->updateActivationStatus($user['id'], 1);
+                return true;
+            }
+            else{
+                return false;
+            }
             
         } catch (PDOException $e) {
             
             error_log("Database error: " . $e->getMessage());
             return false; 
+        }
+    }
+
+
+     /**
+     * Updates the activation status the specified user ID.
+     *
+     * @param int $userId
+     * @param int $status
+     */
+    private function updateActivationStatus($userId, $status)
+    {
+        $sql = "UPDATE users SET activated = :status WHERE id = :id";
+        $db = $this->connectDatabase();
+
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error updating activation status: " . $e->getMessage());
         }
     }
 

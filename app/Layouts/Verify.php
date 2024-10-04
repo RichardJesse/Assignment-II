@@ -26,6 +26,7 @@ class Verify
     public function verifyActivationCode($code){
         
         if($this->verifyCode($code)){
+
             return $this->verificationSuccess();
         }
 
@@ -67,16 +68,13 @@ class Verify
             
             <div class="display-4 text-danger" style="font-family: SUSE;">
                    Failed 
+
+                   This link has already been used.
             </div>
         </div>
     
        
-        <script>
-           
-            setTimeout(function() {
-                window.location.href = 'login.php'; 
-            }, 3000); 
-        </script>
+        
     
         <?php
 
