@@ -122,20 +122,27 @@ class User extends AbstractEntities
             return 'there is a problem with the data that you are sending';
         }
 
-        $updatedField = [];
-        $update = User::query()->update('users');
+        $update = User::build()->update('users');
 
         $oldDetails = $this->findUserByEmail($data['email']);
 
         if ($oldDetails['email'] != $data['email']) {
 
-            $updatedField[] = "email = :email";
-            $update->set('email', )
+            $update->set('email',$data['email'] );
         }
 
         if ($oldDetails['username'] != $data['username']) {
-            $updatedField[] = "username = :username";
+
+            $update->set('username',$data['username'] );
         }
+
+        $update->where('email',$oldDetails['email'] )->execute();
+
+        if($update){
+            return true;
+        }
+
+        return false;
 
         
     }

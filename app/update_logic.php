@@ -1,12 +1,12 @@
 <?php
 
-// use the update profile function to add
-//  the changed details to the database
+
+include_once '../autoload.php';
 
 use Entities\User;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user = new User;
+    $user = new User();
 
 
     $username = $_POST['username'];
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     
-    // $user->updateProfile($data);
+    $user->updateProfile($data);
     // update function implementation pending completion
 
 }

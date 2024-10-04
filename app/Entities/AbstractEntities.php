@@ -50,6 +50,9 @@ class AbstractEntities
      * Used to access the Query class for the 
      * Query builder package
      * 
+     * Works for functions that need the from
+     * in there query
+     * 
      */
     public static function query()
     {
@@ -59,5 +62,13 @@ class AbstractEntities
 
         return $query->from(self::getTableName($className));
     }
+
+    public static function build(){
+
+        $query = new \HemiFrame\Lib\SQLBuilder\Query();
+        return $query;
+
+    }
+
 
 }
