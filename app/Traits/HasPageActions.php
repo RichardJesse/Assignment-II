@@ -36,8 +36,7 @@ trait HasPageActions
      * 
      */
     public function redirectWith($redirectPage, $redirectData){
-        var_dump($redirectData);
-
+       
         $data = http_build_query($redirectData);
         header("Location: " . $redirectPage . "?$data");
         exit();

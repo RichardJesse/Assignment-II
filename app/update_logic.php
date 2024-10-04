@@ -5,6 +5,7 @@ include_once '../autoload.php';
 
 use Entities\User;
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = new User();
 
@@ -19,6 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     
     $user->updateProfile($data);
-    // update function implementation pending completion
+    $redirect = new class(){
+        use HasPageActions;
+        public function updated(){
+            $this->redirect('index.php');
+        }
+    };
+
+    $redirect->updated();
+
 
 }
