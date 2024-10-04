@@ -125,7 +125,7 @@ class User extends AbstractEntities
 
         $update = User::build()->update('users');
 
-        $oldDetails = $this->findUserByEmail($data['email']);
+        $oldDetails = $this->findUserByEmail($this->current()['id']);
 
         if ($oldDetails['email'] != $data['email']) {
 
@@ -138,7 +138,7 @@ class User extends AbstractEntities
         }
         
         
-        $update->where('id', $this->current()['id'])->execute();
+        $update->where('id', $this->current()['id']);
         var_dump($update);
         
         if($update){

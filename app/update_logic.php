@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'];
         $_SESSION['email'];
 
-        $redirect->updated();
+        // $redirect->updated();
     }
     
 
