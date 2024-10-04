@@ -28,7 +28,7 @@ class UserProfile
             </div>
 
             <div class="mb-3 w-75 mx-auto">
-                <button type="submit" class="btn btn-outline-info w-100">Edit</button>
+                <button type="submit" class="btn btn-outline-info w-100">Update</button>
             </div>
         </form>
 

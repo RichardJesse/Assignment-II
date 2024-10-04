@@ -117,16 +117,14 @@ class User extends AbstractEntities
     public function updateProfile($data)
     {
 
-
         if (!$this->isArray($data)) {
             return 'there is a problem with the data that you are sending';
         }
             
-
         $update = User::build()->update('users');
 
-        $oldDetails = $this->findUserByEmail($this->current()['id']);
-
+        $oldDetails = $this->findUserByEmail($this->current()['email']);
+        
         if ($oldDetails['email'] != $data['email']) {
 
             $update->set('email',$data['email'] );
@@ -138,8 +136,8 @@ class User extends AbstractEntities
         }
         
         
-        $update->where('id', $this->current()['id']);
-        var_dump($update);
+        $update->where('id', $this->current()['id'])->execute();
+        
         
         if($update){
             return true;
