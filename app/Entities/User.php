@@ -121,6 +121,7 @@ class User extends AbstractEntities
         if (!$this->isArray($data)) {
             return 'there is a problem with the data that you are sending';
         }
+            
 
         $update = User::build()->update('users');
 
@@ -135,9 +136,10 @@ class User extends AbstractEntities
 
             $update->set('username',$data['username'] );
         }
+        
 
-        $update->where('email',$oldDetails['email'] )->execute();
-
+        $update->where('email', $oldDetails['email']);
+        
         if($update){
             return true;
         }

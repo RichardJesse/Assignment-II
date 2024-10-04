@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     
-    $user->updateProfile($data);
+    $updated = $user->updateProfile($data);
     $redirect = new class(){
         use HasPageActions;
         public function updated(){
@@ -27,7 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     };
 
-    $redirect->updated();
+    if($updated){
+        $_SESSION['username'] = $data['username'];
+        $_SESSION['email'] = $data['email'];
 
+        // var_dump($_SESSION['username']);
+
+        $redirect->updated();
+    }
+    
 
 }
