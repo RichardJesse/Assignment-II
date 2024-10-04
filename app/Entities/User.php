@@ -137,8 +137,9 @@ class User extends AbstractEntities
             $update->set('username',$data['username'] );
         }
         
-
-        $update->where('id', $oldDetails['email'])->execute();
+        
+        $update->where('id', $this->current()['id'])->execute();
+        var_dump($update);
         
         if($update){
             return true;
