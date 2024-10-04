@@ -114,29 +114,30 @@ class User extends AbstractEntities
      * @return bool|string 
      * 
      */
-    public function updateProfile($data){
+    public function updateProfile($data)
+    {
 
 
-        if(!$this->isArray($data)){
+        if (!$this->isArray($data)) {
             return 'there is a problem with the data that you are sending';
         }
 
+        $updatedField = [];
+        $update = User::query()->update('users');
+
         $oldDetails = $this->findUserByEmail($data['email']);
 
-       if($oldDetails['email'] == $data['email']){
+        if ($oldDetails['email'] != $data['email']) {
 
-        // if same ignore otherwise insert the new email
-        // same goes for username
-           
-       }
-        $oldDetails['username'] == $data['username'];
-       
+            $updatedField[] = "email = :email";
+            $update->set('email', )
+        }
 
+        if ($oldDetails['username'] != $data['username']) {
+            $updatedField[] = "username = :username";
+        }
 
-
-
-
-
+        
     }
 
     /**
@@ -155,7 +156,7 @@ class User extends AbstractEntities
         return $user;
     }
 
-    
+
 
 
     /**
